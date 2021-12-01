@@ -1,6 +1,5 @@
 from mib import db
 
-
 class Manager(object):
     db_session = db.session
 

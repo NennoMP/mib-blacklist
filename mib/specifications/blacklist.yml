@@ -1,0 +1,64 @@
+openapi: "3.0.1"
+info:
+  title: Users Service API
+  description: Users Microservice of Message in a Bottle Application
+  version: "0.1"
+
+servers:
+  - url: /
+
+paths:
+  /blacklist/:
+    put:
+      summary: Create a new block relationship
+      tags: [ Blacklist ]
+      operationId: mib.resources.blacklist.block
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: body
+              type: object
+              required:
+                - blocking_user
+                - blocked_user
+              properties:
+                blocking_user:
+                  type: integer
+                  format: int64
+                blocked_user:
+                  type: integer
+                  format: int64
+      responses:
+        200:
+          description: Relationship created
+        default:
+          description: An error occured during the block
+
+    post:
+      summary: Delete a block relationship
+      tags: [ Blacklist ]
+      operationId: mib.resources.blacklist.unblock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: body
+              type: object
+              required:
+                - blocking_user
+                - blocked_user
+              properties:
+                blocking_user:
+                  type: integer
+                  format: int64
+                blocked_user:
+                  type: integer
+                  format: int64
+      responses:
+        200:
+          description: Relationship deleted
+        default:
+          description: An error occured during the unblock
