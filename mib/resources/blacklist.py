@@ -29,7 +29,7 @@ def block(body):
             'status': 'failed',
             'message': 'You already blocked this user',
         }
-        response_status_code = 403
+        response_status_code = 409
 
 
     return jsonify(response_object), response_status_code
