@@ -8,7 +8,7 @@ servers:
   - url: /
 
 paths:
-  /blacklist/:
+  /blacklist:
     put:
       summary: Create a new block relationship
       tags: [ Blacklist ]
@@ -21,8 +21,8 @@ paths:
               x-body-name: body
               type: object
               required:
-                - blocking_user
-                - blocked_user
+                - blocking_id
+                - blocked_id
               properties:
                 blocking_user:
                   type: integer
@@ -33,32 +33,26 @@ paths:
       responses:
         200:
           description: Relationship created
+        404:
+          description: Relantionship already exists
         default:
           description: An error occured during the block
 
-    post:
-      summary: Delete a block relationship
+  /get_blocked_users/<user_id>:
+    get:
+      summary: Get all relationships for a user by its id
       tags: [ Blacklist ]
-      operationId: mib.resources.blacklist.unblock
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              x-body-name: body
-              type: object
-              required:
-                - blocking_user
-                - blocked_user
-              properties:
-                blocking_user:
-                  type: integer
-                  format: int64
-                blocked_user:
-                  type: integer
-                  format: int64
+      operationId: mib.resources.blacklist.get_blocked_users
+      parameters:
+        - name: user_id
+          description: User Unique ID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
-          description: Relationship deleted
+          description: Blocked users list 
         default:
-          description: An error occured during the unblock
+          description: An error occured while retrieving the list
