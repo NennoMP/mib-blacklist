@@ -2,7 +2,9 @@ from mib import db
 
 
 class Blacklist(db.Model):
-    """Auxiliary table for mantaining records of blocked users for each user."""
+    """
+    Auxiliary table for mantaining records of blocked users for each user.
+    """
 
     __tablename__ = 'Blacklist'
 
@@ -14,7 +16,7 @@ class Blacklist(db.Model):
     def __init__(self, *args, **kw):
         super(Blacklist, self).__init__(*args, **kw)
 
-
+    # Set <id_user> and <id_blocked> of a relationship
     def set_relationship(self, blocking_id: int, blocked_id: int):
         self.id_user = blocking_id
         self.id_blocked = blocked_id

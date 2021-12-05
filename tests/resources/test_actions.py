@@ -1,15 +1,10 @@
-from sqlalchemy.orm import relation
-from .view_test import ViewTest
 from faker import Faker
+
+from .view_test import ViewTest
 from tests.models.test_blacklist import TestBlacklist
 
 
-
 class TestActions(ViewTest):
-    """
-        Simulate the user login for testing the resources
-        :return: user
-    """
 
     faker = Faker('it_IT')
 
@@ -17,7 +12,7 @@ class TestActions(ViewTest):
     def setUpClass(cls):
         super(TestActions, cls).setUpClass()
 
-    
+    # Block tests
     def test_block(self):
 
         # Block an already blocked user
@@ -52,6 +47,7 @@ class TestActions(ViewTest):
         assert json_response["status"] == 'success'
         assert json_response["message"] == 'Successfully blocked'
 
+    # Unblock tests
     def test_unblock(self):
 
         # Unblock an user that was not blocked
@@ -87,6 +83,7 @@ class TestActions(ViewTest):
         assert json_response["status"] == 'success'
         assert json_response["message"] == 'Successfully unblocked'
 
+    # Get blocked users tests
     def test_get_blocked_user(self):
         blacklist_relation = TestBlacklist.generate_random_relation()
         self.blacklist_manager.create_relation(blacklist_relation)

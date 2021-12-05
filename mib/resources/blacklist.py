@@ -1,18 +1,25 @@
-from flask import request, jsonify
+from flask import jsonify
 
-from mib.dao.blacklist_manager import BlacklistManager
 from mib.models.blacklist import Blacklist
+from mib.dao.blacklist_manager import BlacklistManager
+
 
 def block(body):
-    """This method allows the blocking of an user."""
+    """
+    This method allows the blocking of an user.
+    
+    :return: json response and status code
+        - 201: successfully blocked
+        - 409: user already blocked
+    """
 
     blocking_id = body['blocking_id']
     blocked_id = body['blocked_id']
 
     block_relation = BlacklistManager.retrieve_relation(
-                                                blocking_id,
-                                                blocked_id
-                                            )
+                                                    blocking_id,
+                                                    blocked_id
+                                                )
     if block_relation is None:
         block_relation = Blacklist()
         block_relation.id_blocked = blocked_id
@@ -36,12 +43,21 @@ def block(body):
 
 
 def unblock(body):
-    """This method allows the unblocking of an user."""
+    """
+    This method allows the unblocking of an user.
+    
+    :return: json response and status code
+        - 200: successfully unblocked
+        - 404: user was not blocked
+    """
 
     blocking_id = body['blocking_id']
     blocked_id = body['blocked_id']
 
-    block_relation = BlacklistManager.retrieve_relation(blocking_id, blocked_id)
+    block_relation = BlacklistManager.retrieve_relation(
+                                                    blocking_id, 
+                                                    blocked_id
+                                                )
     if block_relation is None:
         response_object = {
             'status': 'failed',
@@ -60,11 +76,14 @@ def unblock(body):
 
 
 def get_blocked_users(user_id: int):
-    """This method allows to retrieve the list of blocked users for a specific user.
+    """
+    This method allows to retrieve the list of blocked users for a specific user.
+
+    :return: json response and status code
+        - 200: retrieved blocked users 
     """
 
     blocked_users = BlacklistManager.retrieve_relationships(user_id)
-
     response_object = {
         'status': 'success',
         'blocked_users': blocked_users,
