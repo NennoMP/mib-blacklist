@@ -24,10 +24,10 @@ paths:
                 - blocking_id
                 - blocked_id
               properties:
-                blocking_user:
+                blocking_id:
                   type: integer
                   format: int64
-                blocked_user:
+                blocked_id:
                   type: integer
                   format: int64
       responses:
@@ -53,10 +53,10 @@ paths:
                 - blocking_id
                 - blocked_id
               properties:
-                blocking_user:
+                blocking_id:
                   type: integer
                   format: int64
-                blocked_user:
+                blocked_id:
                   type: integer
                   format: int64
       responses:
@@ -86,3 +86,22 @@ paths:
           description: Blocked users list 
         default:
           description: An error occured while retrieving the list
+
+components:
+  schemas:
+    Blacklist:
+      required:
+        - id_user
+        - id_blocked
+      type: object
+      properties:
+        id_user:
+          type: integer
+          format: int64
+          description: id of the user (un)blocking
+          example: 1
+        id_blocked:
+          type: integer
+          format: int64
+          description: id of the user being (un)blocked
+          example: 2

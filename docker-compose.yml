@@ -26,26 +26,13 @@ services:
         dockerfile: Dockerfile 
 
     ports:
-     - "5003:5003"
+     - "5000:5000"
     env_file:
       - env_file
     environment:
       - POSTGRES_HOST=db
     depends_on:
       - db
-      - migrations
-
-  migrations:
-    #
-    # this service is used to apply migrations on db
-    #
-    <<: *mib_blacklist
-    command: flask db upgrade
-    env_file:
-      - env_file
-    environment:
-      - POSTGRES_HOST=db
-    restart: on-failure
 
 # Declaring all volumes
 volumes:
