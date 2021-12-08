@@ -18,16 +18,16 @@ paths:
         content:
           application/json:
             schema:
-              x-body-name: body
               type: object
+              x-body-name: body
               required:
-                - blocking_id
-                - blocked_id
+                - user_blocked
+                - user_blocking
               properties:
-                blocking_id:
+                user_blocked:
                   type: integer
                   format: int64
-                blocked_id:
+                user_blocking:
                   type: integer
                   format: int64
       responses:
@@ -47,16 +47,16 @@ paths:
         content:
           application/json:
             schema:
-              x-body-name: body
               type: object
+              x-body-name: body
               required:
-                - blocking_id
-                - blocked_id
+                - user_blocked
+                - user_blocking
               properties:
-                blocking_id:
+                user_blocked:
                   type: integer
                   format: int64
-                blocked_id:
+                user_blocking:
                   type: integer
                   format: int64
       responses:
@@ -64,11 +64,10 @@ paths:
           description: Relationship deleted
         404:
           description: Relantionship not exists
-      
         default:
           description: An error occured during the unblock
     
-  /blocked_users/<user_id>:
+  /blocked_users/{user_id}:
     get:
       summary: Get all relationships for a user by its id
       tags: [ Blacklist ]

@@ -13,8 +13,8 @@ def block(body):
         - 409: user already blocked
     """
 
-    blocking_id = body['blocking_id']
-    blocked_id = body['blocked_id']
+    blocking_id = body['user_blocking']
+    blocked_id = body['user_blocked']
 
     block_relation = BlacklistManager.retrieve_relation(
                                                     blocking_id,
@@ -51,8 +51,8 @@ def unblock(body):
         - 404: user was not blocked
     """
 
-    blocking_id = body['blocking_id']
-    blocked_id = body['blocked_id']
+    blocking_id = body['user_blocking']
+    blocked_id = body['user_blocked']
 
     block_relation = BlacklistManager.retrieve_relation(
                                                     blocking_id, 

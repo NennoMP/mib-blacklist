@@ -11,6 +11,6 @@ FLASK_ENV=production
 #
 # POSTGRES_HOST=
 #
-POSTGRES_PASSWORD=default
-POSTGRES_BLACKLIST=mib_blacklist_ms
+POSTGRES_PASSWORD=abcd
+POSTGRES_USER=mib_blacklist_ms
 POSTGRES_DB=mib_blacklist_ms

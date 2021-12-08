@@ -10,7 +10,7 @@ services:
     image: postgres:13
     restart: unless-stopped
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - bldata:/var/lib/postgresql/data
     ports:
       # this is only for development purpose
       - "5342:5342"
@@ -36,4 +36,4 @@ services:
 
 # Declaring all volumes
 volumes:
-  pgdata: # for maintaing db data
+  bldata: # for maintaing db data
