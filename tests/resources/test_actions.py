@@ -20,12 +20,9 @@ class TestActions(ViewTest):
         
         self.blacklist_manager.create_relation(blacklist_relation)
         
-        data = {
-            'blocking_id': blacklist_relation.id_user,
-            'blocked_id': blacklist_relation.id_blocked,
-        }
-
-        response = self.client.put('/blacklist', json=data)
+        url = '/blacklist/{}/{}'.format(
+            blacklist_relation.id_blocked, blacklist_relation.id_user)
+        response = self.client.put(url)
         json_response = response.json
 
         assert response.status_code == 409
@@ -35,12 +32,10 @@ class TestActions(ViewTest):
         # Successfully block a user
         blacklist_relation = TestBlacklist.generate_random_relation()
 
-        data = {
-            'blocking_id': blacklist_relation.id_user,
-            'blocked_id': blacklist_relation.id_blocked,
-        }
+        url = '/blacklist/{}/{}'.format(
+            blacklist_relation.id_blocked, blacklist_relation.id_user)
 
-        response = self.client.put('/blacklist', json=data)
+        response = self.client.put(url)
         json_response = response.json
 
         assert response.status_code == 200
@@ -55,12 +50,11 @@ class TestActions(ViewTest):
 
         self.blacklist_manager.create_relation(blacklist_relation)
 
-        data = {
-            'blocking_id': blacklist_relation.id_user,
-            'blocked_id': blacklist_relation.id_blocked+1,
-        }
 
-        response = self.client.post('/blacklist', json=data)
+        url = '/blacklist/{}/{}'.format(
+            blacklist_relation.id_blocked, 10)
+
+        response = self.client.post(url)
         json_response = response.json
 
         assert response.status_code == 404
@@ -71,12 +65,10 @@ class TestActions(ViewTest):
         blacklist_relation = TestBlacklist.generate_random_relation()
         self.blacklist_manager.create_relation(blacklist_relation)
 
-        data = {
-            'blocking_id': blacklist_relation.id_user,
-            'blocked_id': blacklist_relation.id_blocked,
-        }
+        url = '/blacklist/{}/{}'.format(
+            blacklist_relation.id_blocked, blacklist_relation.id_user)
 
-        response = self.client.post('/blacklist', json=data)
+        response = self.client.post(url)
         json_response = response.json
 
         assert response.status_code == 200
