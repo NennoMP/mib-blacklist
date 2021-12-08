@@ -10,7 +10,7 @@ services:
     image: postgres:13
     restart: unless-stopped
     volumes:
-      - bldata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     ports:
       # this is only for development purpose
       - "5342:5342"
@@ -26,7 +26,7 @@ services:
         dockerfile: Dockerfile 
 
     ports:
-     - "5000:5000"
+     - "5003:5003"
     env_file:
       - env_file
     environment:
@@ -36,4 +36,4 @@ services:
 
 # Declaring all volumes
 volumes:
-  bldata: # for maintaing db data
+  pgdata: # for maintaing db data

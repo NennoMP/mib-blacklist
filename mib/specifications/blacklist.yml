@@ -8,28 +8,26 @@ servers:
   - url: /
 
 paths:
-  /blacklist:
+  /blacklist/{blocked_id}/{blocking_id}:
     put:
       summary: Create a new block relationship
       tags: [ Blacklist ]
       operationId: mib.resources.blacklist.block
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              x-body-name: body
-              required:
-                - user_blocked
-                - user_blocking
-              properties:
-                user_blocked:
-                  type: integer
-                  format: int64
-                user_blocking:
-                  type: integer
-                  format: int64
+      parameters:
+        - name: blocked_id
+          description: User Blocked Unique ID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: blocking_id
+          description: User Blocking Unique ID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
           description: Relationship created
@@ -42,23 +40,21 @@ paths:
       summary: Delete a block relationship
       tags: [ Blacklist ]
       operationId: mib.resources.blacklist.unblock
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              x-body-name: body
-              required:
-                - user_blocked
-                - user_blocking
-              properties:
-                user_blocked:
-                  type: integer
-                  format: int64
-                user_blocking:
-                  type: integer
-                  format: int64
+      parameters:
+        - name: blocked_id
+          description: User Unblocked Unique ID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: blocking_id
+          description: User Unblocking Unique ID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
           description: Relationship deleted

@@ -4,7 +4,7 @@ from mib.models.blacklist import Blacklist
 from mib.dao.blacklist_manager import BlacklistManager
 
 
-def block(body):
+def block(blocked_id: int, blocking_id: int):
     """
     This method allows the blocking of an user.
     
@@ -12,9 +12,6 @@ def block(body):
         - 201: successfully blocked
         - 409: user already blocked
     """
-
-    blocking_id = body['user_blocking']
-    blocked_id = body['user_blocked']
 
     block_relation = BlacklistManager.retrieve_relation(
                                                     blocking_id,
@@ -42,7 +39,7 @@ def block(body):
     return jsonify(response_object), response_status_code
 
 
-def unblock(body):
+def unblock(blocked_id: int, blocking_id: int):
     """
     This method allows the unblocking of an user.
     
@@ -50,9 +47,6 @@ def unblock(body):
         - 200: successfully unblocked
         - 404: user was not blocked
     """
-
-    blocking_id = body['user_blocking']
-    blocked_id = body['user_blocked']
 
     block_relation = BlacklistManager.retrieve_relation(
                                                     blocking_id, 

@@ -3,7 +3,7 @@
 #
 #------------------------
 FLASK_ENV=production
-
+APP_SECRET_KET=SNRMPRg3iXN3Ce6ggaJRsTeT
 #
 # Postgres configuration
 #
