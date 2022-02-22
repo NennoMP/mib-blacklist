@@ -3,8 +3,6 @@
 [![CircleCI](https://circleci.com/gh/NennoMP/mib-blacklist.svg?style=svg)](https://app.circleci.com/pipelines/github/NennoMP/mib-blacklist)
 [![codecov](https://codecov.io/gh/NennoMP/mib-blacklist/branch/main/graph/badge.svg?token=3X0XMJAPQG)](https://codecov.io/gh/NennoMP/mib-blacklist)
 
-This is the main repository of Message in a Bottle application, self project of *Advanced Software Engineering* course, University of Pisa.
-
 This is the source code of My Message in a Bottle Blacklist microservice, project of **Advanced Software Engineering** course of the MSc in Computer Science,
 University of Pisa.
 
